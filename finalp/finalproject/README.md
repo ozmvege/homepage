@@ -1,29 +1,6 @@
 # Flask Webapp
-#### Video Demo:  https://youtu.be/VIAyCyLlzK8
 #### Description:
 
-My final project is a flask webapp with a sophisticated login/register system and 2 Tools.
-1 Is a OpenAI Api Chatbot and the 2nd is a ML tool where i only build the notify page
-
-Login/Register
-It's a modern design with a darkmode switch.
-It's also checking the Database if a input is missing, maybe a input is wrong, a name/email is already taken,
-all of this error with show a error on the front end where the user can see what went wrong
-From register we calculate data into 2 tables:
-users for username and password and user_details for fname, lname, etc connecting to the users table via foreign key
-When creating the password we also check for length, and if predefined critereas are meet which we could change when neeeded.
-We also have forgot-password page which hasn't the functionality yet
-
-Now that we are logged in:
-
-On the indexpage the user will be greeted by a classical / page.
-Right we have a image and on the left side we have a welcome text and a not functioning link to a resume and another dropdown menu to see the apps of the webapp
-Maybe at this point u also noticed the navbar.
-At this point we have 2 Icons on the top right:
-1 for github and twitter each.
-We can also again manipulate the darkmode/lightmode with a switch
-We also have a fancy logout button.
-And at the left side there is a classical home button and 2 navigation buttons.
 
 ai.html
 Now ai.html is chatbot that is powered by openai's api.
