@@ -1,17 +1,29 @@
 function toggleThemeMenu() {
 	let themeMenu = document.querySelector('#theme-menu');
-
+  
 	if (!themeMenu) return;
-
+  
+	// Retrieve the selected theme from local storage, if available
+	const selectedTheme = localStorage.getItem('selectedTheme');
+  
+	// If a theme was previously selected, apply it
+	if (selectedTheme) {
+	  document.documentElement.setAttribute('data-bs-theme', selectedTheme);
+	}
+  
 	document.querySelectorAll('[data-bs-theme-value]').forEach(value => {
 	  value.addEventListener('click', () => {
 		const theme = value.getAttribute('data-bs-theme-value');
 		document.documentElement.setAttribute('data-bs-theme', theme);
+		
+		// Store the selected theme in local storage
+		localStorage.setItem('selectedTheme', theme);
 	  });
 	});
   }
-
+  
   toggleThemeMenu();
+  
 
 var weight, height, measure, bmi, error ;
 
@@ -48,3 +60,12 @@ function calculate() {
 		document.getElementById("results").innerHTML = "Negative Values not Allowed";
 	}
 }
+
+const cursor = document.querySelector('.custom-cursor');
+
+document.addEventListener('mousemove', (e) => {
+  const x = e.clientX;
+  const y = e.clientY;
+  cursor.style.left = x + 'px';
+  cursor.style.top = y + 'px';
+});
