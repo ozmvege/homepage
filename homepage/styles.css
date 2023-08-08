@@ -28,6 +28,7 @@
   padding: 10px;
   text-decoration: none;
   transition: background-color 0.2s; /* Add smooth transition */
+  margin-top: 25px;
 }
 
 /* On hover, set the background color */
@@ -60,5 +61,5 @@ body {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: radial-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+  background: radial-gradient(rgba(255, 182, 193, .5), rgba(255, 255, 255, 0)); /* Pink color */
 }
