@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="viewport" content="initial-scale=1, width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
@@ -120,12 +120,23 @@
     var mouseX = 0;
     var mouseY = 0;
 
-    window.addEventListener('mousemove', function(e) {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
+    var isMouseMoving = false; // Add a flag to track mouse movement
+
+
+    function handleMouseMove(e) {
+      mouseX = e.clientX || e.touches[0].clientX; // Use touch coordinates for mobile
+      mouseY = e.clientY || e.touches[0].clientY;
+      isMouseMoving = true; // Set the flag to true when there's movement
+    }
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('touchmove', handleMouseMove);
 
     function animateParticles() {
+      if (!isMouseMoving) {
+        return; // Don't animate if the mouse is not moving
+      }
+
       for (var ii = 1; ii < numP; ii++) {
         gsap.to('#p' + ii, 0.5, { 
           delay: 0.005 * ii, 
@@ -136,6 +147,8 @@
         gsap.to('#p' + ii, 0.005 * ii, { scale: 2 }); // Adjust the scale for smaller particles
         gsap.to('#p' + ii, 0.5, { delay: 0.005 * ii, scale: 0 });
       }
+
+      isMouseMoving = false; // Reset the flag after the animations are applied
     }
 
     gsap.ticker.add(animateParticles);
