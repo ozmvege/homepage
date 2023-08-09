@@ -61,7 +61,7 @@ function calculate() {
 	}
 }
 
-var numP = 150; // Increase the number of particles
+var numP = 100; // Increase the number of particles
 
 for (var i = 1; i < numP; i++) {
   var _p = document.getElementById('p0').cloneNode(false);
@@ -97,7 +97,7 @@ function animateParticles() {
 	  y: mouseY + 25 - 50 * Math.random(), 
 	  ease: Back.easeOut.config(3)
 	});
-	gsap.to('#p' + ii, 0.005 * ii, { scale: 2 }); // Adjust the scale for smaller particles
+	gsap.to('#p' + ii, 0.005 * ii, { scale: 1 }); // Adjust the scale for smaller particles
 	gsap.to('#p' + ii, 0.5, { delay: 0.005 * ii, scale: 0 });
   }
 

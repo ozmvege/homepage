@@ -105,55 +105,7 @@
   <div id="particles">
     <div class="p" id="p0"></div>
   </div>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.0/gsap.min.js"></script>
-  <script>
-    var numP = 150; // Increase the number of particles
-
-    for (var i = 1; i < numP; i++) {
-      var _p = document.getElementById('p0').cloneNode(false);
-      _p.id = "p" + i;
-      document.getElementById('particles').appendChild(_p);
-      gsap.set(_p, { scale: 0.1 + 1.0 * Math.random(), alpha: 0.25 + Math.random(), x: window.innerWidth * Math.random(), y: window.innerHeight * Math.random() });
-    }
-
-    var mouseX = 0;
-    var mouseY = 0;
-
-    var isMouseMoving = false; // Add a flag to track mouse movement
-
-
-    function handleMouseMove(e) {
-      mouseX = e.clientX || e.touches[0].clientX; // Use touch coordinates for mobile
-      mouseY = e.clientY || e.touches[0].clientY;
-      isMouseMoving = true; // Set the flag to true when there's movement
-    }
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('touchmove', handleMouseMove);
-
-    function animateParticles() {
-      if (!isMouseMoving) {
-        return; // Don't animate if the mouse is not moving
-      }
-
-      for (var ii = 1; ii < numP; ii++) {
-        gsap.to('#p' + ii, 0.5, { 
-          delay: 0.005 * ii, 
-          x: mouseX + 25 - 50 * Math.random(), 
-          y: mouseY + 25 - 50 * Math.random(), 
-          ease: Back.easeOut.config(3)
-        });
-        gsap.to('#p' + ii, 0.005 * ii, { scale: 2 }); // Adjust the scale for smaller particles
-        gsap.to('#p' + ii, 0.5, { delay: 0.005 * ii, scale: 0 });
-      }
-
-      isMouseMoving = false; // Reset the flag after the animations are applied
-    }
-
-    gsap.ticker.add(animateParticles);
-  </script>
-
   <script src="main.js"></script>
 </body>
 </html>
