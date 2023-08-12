@@ -4,6 +4,19 @@
     font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: black !important;
   }
+/* Apply black text color to navbar in both light and dark themes */
+.navbar,
+.navbar-dark {
+    color: black !important;
+}
+
+/* Styling for the dark theme */
+[data-bs-theme='dark'] {
+    --bs-dark: #343a40;
+    --bs-secondary-dark: #6c757d;
+    /* Add other necessary dark theme styles */
+}
+
 
 .text-center {
   font-family: "IBM Plex Sans", sans-serif;

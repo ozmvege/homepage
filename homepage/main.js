@@ -1,29 +1,31 @@
 function toggleThemeMenu() {
-	let themeMenu = document.querySelector('#theme-menu');
-  
-	if (!themeMenu) return;
-  
-	// Retrieve the selected theme from local storage, if available
-	const selectedTheme = localStorage.getItem('selectedTheme');
-  
-	// If a theme was previously selected, apply it
-	if (selectedTheme) {
-	  document.documentElement.setAttribute('data-bs-theme', selectedTheme);
-	}
-  
-	document.querySelectorAll('[data-bs-theme-value]').forEach(value => {
-	  value.addEventListener('click', () => {
-		const theme = value.getAttribute('data-bs-theme-value');
-		document.documentElement.setAttribute('data-bs-theme', theme);
-		
-		// Store the selected theme in local storage
-		localStorage.setItem('selectedTheme', theme);
-	  });
-	});
-  }
-  
-  toggleThemeMenu();
-  
+    let themeMenu = document.querySelector('#theme-menu');
+
+    if (!themeMenu) return;
+
+    // Apply navbar-dark class by default since the page is in dark mode
+    document.querySelector('.navbar').classList.add('navbar-dark');
+
+    document.querySelectorAll('[data-bs-theme-value]').forEach(value => {
+        value.addEventListener('click', () => {
+            const theme = value.getAttribute('data-bs-theme-value');
+            document.documentElement.setAttribute('data-bs-theme', theme);
+
+            // Apply navbar-dark class for dark theme
+            if (theme === 'dark') {
+                document.querySelector('.navbar').classList.add('navbar-dark');
+            } else {
+                document.querySelector('.navbar').classList.remove('navbar-dark');
+            }
+
+            // Store the selected theme in local storage
+            localStorage.setItem('selectedTheme', theme);
+        });
+    });
+}
+
+toggleThemeMenu();
+
 
 var weight, height, measure, bmi, error ;
 
@@ -105,4 +107,3 @@ function animateParticles() {
 }
 
 gsap.ticker.add(animateParticles);
-
