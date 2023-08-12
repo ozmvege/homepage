@@ -1,9 +1,18 @@
 .navbar {
     background-color: pink; /* Dark grey color */
+    margin-bottom: 20px;
+    font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   }
 
+  .text-center {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-style: italic;
+  }
+  
+
 .h1h {
-  margin-bottom: 2%;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
 .col-6 {
@@ -27,8 +36,8 @@
   background-color: lightslategrey; /* Make the button transparent */
   padding: 10px;
   text-decoration: none;
-  transition: background-color 0.2s; /* Add smooth transition */
-  margin-top: 25px;
+  transition: background-color 0.3s; /* Add smooth transition */
+  margin-top: 15%;
 }
 
 /* On hover, set the background color */
@@ -40,7 +49,7 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  height: 100%;
+  height: 90%;
   overflow: hidden;
   cursor: none;
 }
@@ -63,3 +72,13 @@ body {
   border-radius: 50%;
   background: radial-gradient(rgba(255, 182, 193, .5), rgba(255, 255, 255, 0)); /* Pink color */
 }
+
+/* CSS for mobile */
+
+media screen and (max-width: 600px) {
+  .col-6 {
+    flex-basis: 100%;
+  }
+}
+```
+```
