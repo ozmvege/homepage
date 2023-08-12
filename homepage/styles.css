@@ -2,13 +2,14 @@
     background-color: pink; /* Dark grey color */
     margin-bottom: 20px;
     font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: black !important;
   }
 
-  .text-center {
-    font-family: "IBM Plex Sans", sans-serif;
-    font-style: italic;
-  }
-  
+.text-center {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-style: italic;
+}
+
 
 .h1h {
   margin-top: 5%;
@@ -42,8 +43,10 @@
 
 /* On hover, set the background color */
 .custom-button:hover {
-  background-color: #0baa60; /* Set your desired background color */
+  background-color: pink; /* Set your desired background color */
 }
+
+
 
 body {
   margin: 0;
@@ -80,5 +83,3 @@ media screen and (max-width: 600px) {
     flex-basis: 100%;
   }
 }
-```
-```

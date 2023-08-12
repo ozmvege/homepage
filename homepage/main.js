@@ -105,3 +105,4 @@ function animateParticles() {
 }
 
 gsap.ticker.add(animateParticles);
+
