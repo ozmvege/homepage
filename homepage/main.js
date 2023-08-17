@@ -3,20 +3,20 @@ function toggleThemeMenu() {
 
     if (!themeMenu) return;
 
-    // Apply navbar-dark class by default since the page is in dark mode
-    document.querySelector('.navbar').classList.add('navbar-dark');
+    // Check local storage for the selected theme and apply it
+    const selectedTheme = localStorage.getItem('selectedTheme');
+    if (selectedTheme) {
+        const container = document.querySelector('.wrapcontent');
+        container.setAttribute('data-bs-theme', selectedTheme);
+    }
 
     document.querySelectorAll('[data-bs-theme-value]').forEach(value => {
         value.addEventListener('click', () => {
             const theme = value.getAttribute('data-bs-theme-value');
-            document.documentElement.setAttribute('data-bs-theme', theme);
 
-            // Apply navbar-dark class for dark theme
-            if (theme === 'dark') {
-                document.querySelector('.navbar').classList.add('navbar-dark');
-            } else {
-                document.querySelector('.navbar').classList.remove('navbar-dark');
-            }
+            // Set the theme for the container and its children
+            const container = document.querySelector('.wrapcontent');
+            container.setAttribute('data-bs-theme', theme);
 
             // Store the selected theme in local storage
             localStorage.setItem('selectedTheme', theme);
@@ -25,6 +25,7 @@ function toggleThemeMenu() {
 }
 
 toggleThemeMenu();
+
 
 
 var weight, height, measure, bmi, error ;
