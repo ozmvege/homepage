@@ -6,7 +6,7 @@ function toggleThemeMenu() {
 	// Check local storage for the selected theme and apply it
 	const selectedTheme = localStorage.getItem('selectedTheme');
 	if (selectedTheme) {
-	  const container = document.querySelector('.body');
+	  const container = document.querySelector('.wrapcontent');
 	  container.setAttribute('data-bs-theme', selectedTheme);
 
 	  const themeIcons = {
@@ -33,7 +33,7 @@ function toggleThemeMenu() {
 	document.querySelectorAll('[data-bs-theme-value]').forEach(value => {
 	  value.addEventListener('click', () => {
 		const theme = value.getAttribute('data-bs-theme-value');
-		const container = document.querySelector('.body');
+		const container = document.querySelector('.wrapcontent');
 		container.setAttribute('data-bs-theme', theme);
 
 		// Update the theme icon in the dropdown
