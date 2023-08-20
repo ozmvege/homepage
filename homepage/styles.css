@@ -4,18 +4,52 @@
     font-family: Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   }
 
-/* Styling for the dark theme */
-/* Default styles for light theme */
-.wrapcontent[data-bs-theme='light'] {
-  background-color: lightslategray;
-  color: black;
+  .wrapcontent[data-bs-theme='light'] {
+    background-color: lightslategray;
+    color: black;
+  }
+  
+  /* Dark theme styles */
+  .wrapcontent[data-bs-theme='dark'] {
+    background-color: #343a40;
+    color: white;
+  }
+
+.btn-bd-primary {
+    --bd-violet-bg: #712cf9;
+    --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+    --bs-btn-font-weight: 600;
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-bg: var(--bd-violet-bg);
+    --bs-btn-border-color: var(--bd-violet-bg);
+    --bs-btn-hover-color: var(--bs-white);
+    --bs-btn-hover-bg: #6528e0;
+    --bs-btn-hover-border-color: #6528e0;
+    --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+    --bs-btn-active-color: var(--bs-btn-hover-color);
+    --bs-btn-active-bg: #5a23c8;
+    --bs-btn-active-border-color: #5a23c8;
+}
+.bd-mode-toggle {
+    z-index: 1500;
 }
 
-/* Dark theme styles */
-.wrapcontent[data-bs-theme='dark'] {
-  background-color: #343a40;
-  color: white;
-}
+.theme-icon-active use {
+    fill: white; /* Set the fill color to white for active icons */
+  }
+
+  .scrollarea {
+    overflow-y: auto;
+  }
+  main {
+    height: 100vh;
+    height: -webkit-fill-available;
+    max-height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }  
+
 
 
 
