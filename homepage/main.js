@@ -1,31 +1,64 @@
 function toggleThemeMenu() {
-    let themeMenu = document.querySelector('#theme-menu');
+	let themeMenu = document.querySelector('.bd-mode-toggle');
 
-    if (!themeMenu) return;
+	if (!themeMenu) return;
 
-    // Check local storage for the selected theme and apply it
-    const selectedTheme = localStorage.getItem('selectedTheme');
-    if (selectedTheme) {
-        const container = document.querySelector('.wrapcontent');
-        container.setAttribute('data-bs-theme', selectedTheme);
-    }
+	// Check local storage for the selected theme and apply it
+	const selectedTheme = localStorage.getItem('selectedTheme');
+	if (selectedTheme) {
+	  const container = document.querySelector('.body');
+	  container.setAttribute('data-bs-theme', selectedTheme);
 
-    document.querySelectorAll('[data-bs-theme-value]').forEach(value => {
-        value.addEventListener('click', () => {
-            const theme = value.getAttribute('data-bs-theme-value');
+	  const themeIcons = {
+		light: 'sun-fill',
+		dark: 'moon-stars-fill',
+		auto: 'circle-half'
+	  };
 
-            // Set the theme for the container and its children
-            const container = document.querySelector('.wrapcontent');
-            container.setAttribute('data-bs-theme', theme);
+	  const themeToggle = document.querySelector('.theme-icon-active use');
+	  themeToggle.setAttribute('href', `#${themeIcons[selectedTheme]}`);
+	  
+	  // Remove the active class from all theme buttons
+	  document.querySelectorAll('[data-bs-theme-value]').forEach(value => {
+		value.classList.remove('active');
+	  });
 
-            // Store the selected theme in local storage
-            localStorage.setItem('selectedTheme', theme);
-        });
-    });
-}
+	  // Add the active class to the selected theme button
+	  const activeThemeButton = document.querySelector(`[data-bs-theme-value="${selectedTheme}"]`);
+	  if (activeThemeButton) {
+		activeThemeButton.classList.add('active');
+	  }
+	}
 
-toggleThemeMenu();
+	document.querySelectorAll('[data-bs-theme-value]').forEach(value => {
+	  value.addEventListener('click', () => {
+		const theme = value.getAttribute('data-bs-theme-value');
+		const container = document.querySelector('.body');
+		container.setAttribute('data-bs-theme', theme);
 
+		// Update the theme icon in the dropdown
+		const themeToggle = document.querySelector('.theme-icon-active use');
+		const themeIcons = {
+		  light: 'sun-fill',
+		  dark: 'moon-stars-fill',
+		  auto: 'circle-half'
+		};
+		themeToggle.setAttribute('href', `#${themeIcons[theme]}`);
+
+		// Remove the active class from all theme buttons
+		document.querySelectorAll('[data-bs-theme-value]').forEach(button => {
+		  button.classList.remove('active');
+		});
+
+		// Add the active class to the clicked theme button
+		value.classList.add('active');
+
+		localStorage.setItem('selectedTheme', theme);
+	  });
+	});
+  }
+
+  toggleThemeMenu();
 
 
 var weight, height, measure, bmi, error ;
