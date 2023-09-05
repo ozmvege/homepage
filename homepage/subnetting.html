@@ -107,7 +107,7 @@
     </ul>
   </div>
   <div class="wrapcontent" data-bs-theme="dark">
-    <div>
+      <div>
         <form>
           <input id="eaShow" type="radio" name="enterAction" value="showAll" checked="">
           <label for="eaShow">Show all</label>
@@ -115,135 +115,140 @@
           <label for="eaCheck">Check All</label>
         </form>
       </div>
-    <div class="container vh-100 justify-content-center align-items-center d-flex">
-    <form onsubmit="doEnterAction()">
-        <table border="3">
-            <tbody>
-            <tr>
-                <td> <input type="button" value="New Problem" onclick="ClearForm(this.form)" name="new_problem"></td>
-                <td align="center" rowspan="2"></td>
-                <th> Target IP address </th>
-                <td><input type="tel" name="givenOctet1" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> <strong>.</strong>
-                <input type="tel" name="givenOctet2" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> <strong>.</strong>
-                <input type="tel" name="givenOctet3" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> <strong>.</strong>
-                <input type="tel" name="givenOctet4" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> <strong>/</strong>
-                <input type="tel" name="givenMask" size="2" maxlength="2" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)">
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <br>
-        <table border="3">
-            <tbody>
-            <tr>
-                <td></td>
-                <th>IP address</th>
-                <th>Check/Show</th>
-                <th>Answer</th>
-                <th>Correct?</th>
-            </tr>
-            <tr>
-                <th>Network</th>
-                <td><input type="tel" name="networkOctet1" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
-                <input type="tel" name="networkOctet2" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
-                <input type="tel" name="networkOctet3" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
-                <input type="tel" name="networkOctet4" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)">
-                </td>
-                <td align="center">
-                <input type="button" value="Check" onclick="Check(this.form,1)">
-                <input type="button" value="Show" onclick="Show(this.form,1)">
-                </td>
-                <td><input type="tel" name="networkAnswer1" size="3" disabled=""> .
-                <input type="tel" name="networkAnswer2" size="3" disabled=""> .
-                <input type="tel" name="networkAnswer3" size="3" disabled=""> .
-                <input type="tel" name="networkAnswer4" size="3" disabled="">
-                </td>
-                <td><input type="text" name="networkOK" size="3" disabled=""></td>
-            </tr>
-            <tr>
-                <th>First Host</th>
-                <td><input type="tel" name="firstHostOctet1" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
-                <input type="tel" name="firstHostOctet2" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
-                <input type="tel" name="firstHostOctet3" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
-                <input type="tel" name="firstHostOctet4" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)">
-                </td>
-                <td align="center">
-                <input type="button" value="Check" onclick="Check(this.form,2)">
-                <input type="button" value="Show" onclick="Show(this.form,2)">
-                </td>
-                <td><input type="tel" name="firstHostAnswer1" size="3" disabled=""> .
-                <input type="tel" name="firstHostAnswer2" size="3" disabled=""> .
-                <input type="tel" name="firstHostAnswer3" size="3" disabled=""> .
-                <input type="tel" name="firstHostAnswer4" size="3" disabled="">
-                </td>
-                <td><input type="text" name="firstHostOK" size="3" disabled=""></td>
-            </tr><tr>
-                <th>Last Host</th>
-                <td><input type="tel" name="lastHostOctet1" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
-                <input type="tel" name="lastHostOctet2" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
-                <input type="tel" name="lastHostOctet3" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
-                <input type="tel" name="lastHostOctet4" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)">
-                </td>
-                <td align="center">
-                <input type="button" value="Check" onclick="Check(this.form,3)">
-                <input type="button" value="Show" onclick="Show(this.form,3)">
-                </td>
-                <td><input type="tel" name="lastHostAnswer1" size="3" disabled=""> .
-                <input type="tel" name="lastHostAnswer2" size="3" disabled=""> .
-                <input type="tel" name="lastHostAnswer3" size="3" disabled=""> .
-                <input type="tel" name="lastHostAnswer4" size="3" disabled="">
-                </td>
-                <td><input type="text" name="lastHostOK" size="3" disabled=""></td>
-            </tr><tr>
-                <th>Broadcast</th>
-                <td><input type="tel" name="broadcastOctet1" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
-                <input type="tel" name="broadcastOctet2" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
-                <input type="tel" name="broadcastOctet3" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
-                <input type="tel" name="broadcastOctet4" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)">
-                </td>
-                <td align="center">
-                <input type="button" value="Check" onclick="Check(this.form,4)">
-                <input type="button" value="Show" onclick="Show(this.form,4)">
-                </td>
-                <td><input type="tel" name="broadcastAnswer1" size="3" disabled=""> .
-                <input type="tel" name="broadcastAnswer2" size="3" disabled=""> .
-                <input type="tel" name="broadcastAnswer3" size="3" disabled=""> .
-                <input type="tel" name="broadcastAnswer4" size="3" disabled="">
-                </td>
-                <td><input type="text" name="broadcastOK" size="3" disabled=""></td>
-            </tr>
-            <tr>
-                <th>Next Subnet</th>
-                <td><input type="tel" name="nextsubnetOctet1" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
-                <input type="tel" name="nextsubnetOctet2" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
-                <input type="tel" name="nextsubnetOctet3" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
-                <input type="tel" name="nextsubnetOctet4" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)">
-                </td>
-                <td align="center">
-                <input type="button" value="Check" onclick="Check(this.form,5)">
-                <input type="button" value="Show" onclick="Show(this.form,5)">
-                </td>
-                <td><input type="tel" name="nextsubnetAnswer1" size="3" disabled=""> .
-                <input type="tel" name="nextsubnetAnswer2" size="3" disabled=""> .
-                <input type="tel" name="nextsubnetAnswer3" size="3" disabled=""> .
-                <input type="tel" name="nextsubnetAnswer4" size="3" disabled="">
-                </td>
-                <td><input type="text" name="nextsubnetOK" size="3" disabled=""></td>
-            </tr>
-            <tr>
-                <th colspan="2" align="center">Check or Show ALL</th>
-                <td align="center">
-                <input type="button" value="Check" onclick="Check(this.form,6)" name="check_all">
-                <input type="button" value="Show" onclick="Show(this.form,6)" name="show_all">
-                </td>
-                <td></td>
-                <td></td>
-            </tr>
-            </tbody>
-        </table>
-        <input type="submit" style="border:0; padding:0; font-size:0" tabindex="-1">
-    </form>
-</div>
+    <div class="wrapper">
+      <div class="container justify-content-center align-items-center d-flex">
+      <form onsubmit="doEnterAction()">
+          <table border="3">
+              <tbody>
+              <tr>
+                  <td> <input type="button" value="New Problem" onclick="ClearForm(this.form)" name="new_problem"></td>
+                  <td align="center" rowspan="2"></td>
+                  <th> Target IP address </th>
+                  <td><input type="tel" name="givenOctet1" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> <strong>.</strong>
+                  <input type="tel" name="givenOctet2" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> <strong>.</strong>
+                  <input type="tel" name="givenOctet3" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> <strong>.</strong>
+                  <input type="tel" name="givenOctet4" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> <strong>/</strong>
+                  <input type="tel" name="givenMask" size="2" maxlength="2" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)">
+                  </td>
+              </tr>
+              </tbody>
+          </table>
+          <br>
+          <table border="3">
+              <tbody>
+              <tr>
+                  <td></td>
+                  <th>IP address</th>
+                  <th>Check/Show</th>
+                  <th>Answer</th>
+                  <th>Correct?</th>
+              </tr>
+              <tr>
+                  <th>Network</th>
+                  <td><input type="tel" name="networkOctet1" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
+                  <input type="tel" name="networkOctet2" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
+                  <input type="tel" name="networkOctet3" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
+                  <input type="tel" name="networkOctet4" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)">
+                  </td>
+                  <td align="center">
+                  <input type="button" value="Check" onclick="Check(this.form,1)">
+                  <input type="button" value="Show" onclick="Show(this.form,1)">
+                  </td>
+                  <td><input type="tel" name="networkAnswer1" size="3" disabled=""> .
+                  <input type="tel" name="networkAnswer2" size="3" disabled=""> .
+                  <input type="tel" name="networkAnswer3" size="3" disabled=""> .
+                  <input type="tel" name="networkAnswer4" size="3" disabled="">
+                  </td>
+                  <td><input type="text" name="networkOK" size="3" disabled=""></td>
+              </tr>
+              <tr>
+                  <th>First Host</th>
+                  <td><input type="tel" name="firstHostOctet1" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
+                  <input type="tel" name="firstHostOctet2" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
+                  <input type="tel" name="firstHostOctet3" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
+                  <input type="tel" name="firstHostOctet4" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)">
+                  </td>
+                  <td align="center">
+                  <input type="button" value="Check" onclick="Check(this.form,2)">
+                  <input type="button" value="Show" onclick="Show(this.form,2)">
+                  </td>
+                  <td><input type="tel" name="firstHostAnswer1" size="3" disabled=""> .
+                  <input type="tel" name="firstHostAnswer2" size="3" disabled=""> .
+                  <input type="tel" name="firstHostAnswer3" size="3" disabled=""> .
+                  <input type="tel" name="firstHostAnswer4" size="3" disabled="">
+                  </td>
+                  <td><input type="text" name="firstHostOK" size="3" disabled=""></td>
+              </tr><tr>
+                  <th>Last Host</th>
+                  <td><input type="tel" name="lastHostOctet1" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
+                  <input type="tel" name="lastHostOctet2" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
+                  <input type="tel" name="lastHostOctet3" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
+                  <input type="tel" name="lastHostOctet4" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)">
+                  </td>
+                  <td align="center">
+                  <input type="button" value="Check" onclick="Check(this.form,3)">
+                  <input type="button" value="Show" onclick="Show(this.form,3)">
+                  </td>
+                  <td><input type="tel" name="lastHostAnswer1" size="3" disabled=""> .
+                  <input type="tel" name="lastHostAnswer2" size="3" disabled=""> .
+                  <input type="tel" name="lastHostAnswer3" size="3" disabled=""> .
+                  <input type="tel" name="lastHostAnswer4" size="3" disabled="">
+                  </td>
+                  <td><input type="text" name="lastHostOK" size="3" disabled=""></td>
+              </tr><tr>
+                  <th>Broadcast</th>
+                  <td><input type="tel" name="broadcastOctet1" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
+                  <input type="tel" name="broadcastOctet2" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
+                  <input type="tel" name="broadcastOctet3" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
+                  <input type="tel" name="broadcastOctet4" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)">
+                  </td>
+                  <td align="center">
+                  <input type="button" value="Check" onclick="Check(this.form,4)">
+                  <input type="button" value="Show" onclick="Show(this.form,4)">
+                  </td>
+                  <td><input type="tel" name="broadcastAnswer1" size="3" disabled=""> .
+                  <input type="tel" name="broadcastAnswer2" size="3" disabled=""> .
+                  <input type="tel" name="broadcastAnswer3" size="3" disabled=""> .
+                  <input type="tel" name="broadcastAnswer4" size="3" disabled="">
+                  </td>
+                  <td><input type="text" name="broadcastOK" size="3" disabled=""></td>
+              </tr>
+              <tr>
+                  <th>Next Subnet</th>
+                  <td><input type="tel" name="nextsubnetOctet1" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
+                  <input type="tel" name="nextsubnetOctet2" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
+                  <input type="tel" name="nextsubnetOctet3" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)"> .
+                  <input type="tel" name="nextsubnetOctet4" size="3" maxlength="3" class="userinput" onfocus="uiInput(this)" onkeydown="jumpdot(event)">
+                  </td>
+                  <td align="center">
+                  <input type="button" value="Check" onclick="Check(this.form,5)">
+                  <input type="button" value="Show" onclick="Show(this.form,5)">
+                  </td>
+                  <td><input type="tel" name="nextsubnetAnswer1" size="3" disabled=""> .
+                  <input type="tel" name="nextsubnetAnswer2" size="3" disabled=""> .
+                  <input type="tel" name="nextsubnetAnswer3" size="3" disabled=""> .
+                  <input type="tel" name="nextsubnetAnswer4" size="3" disabled="">
+                  </td>
+                  <td><input type="text" name="nextsubnetOK" size="3" disabled=""></td>
+              </tr>
+              <tr>
+                  <th colspan="2" align="center">Check or Show ALL</th>
+                  <td align="center">
+                  <input type="button" value="Check" onclick="Check(this.form,6)" name="check_all">
+                  <input type="button" value="Show" onclick="Show(this.form,6)" name="show_all">
+                  </td>
+                  <td></td>
+                  <td></td>
+              </tr>
+              </tbody>
+          </table>
+          <input type="submit" style="border:0; padding:0; font-size:0" tabindex="-1">
+      </form>
+  </div>
+  <div class="container justify-content-center align-items-center">
+    <h1>Test</h1>
+    <textarea></textarea>
+  </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 <script src="sub.js"></script>
