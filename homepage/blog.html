@@ -16,7 +16,7 @@
         <img src="static/ozetransp.png" width="100px" height="50px" alt="logo">
         </a>
         <div class="list-group list-group-flush border-bottom scrollarea">
-            <a href="#" class="list-group-item list-group-item-action py-3 lh-sm">
+            <a href="oci-lb-nginx-host-webapp.html" class="list-group-item list-group-item-action py-3 lh-sm">
                 <div class="d-flex w-100 align-items-center justify-content-between">
               <strong class="mb-1">OCI Free Webapp Hosting</strong>
             </div>
@@ -31,11 +31,153 @@
           </a>
         </div>
       </div>
-    <div class="container align-items-center">
-            <h1 class="bh1">
-                Welcome to my blog
-            </h1>
+      <div class="container align-items-center">
+        <h1>Hosting a Flask Web Application on OCI</h1>
+        <p>This guide will walk you through the steps to host a Flask web application on Oracle Cloud Infrastructure (OCI) using various OCI services.</p>
+    
+        <h2>OCI Services Used</h2>
+        <ul>
+            <li>DNS Zone</li>
+            <li>Layer 7 Load Balancer</li>
+            <li>Custom Images</li>
+            <li>Instance Configuration and Instance Pools</li>
+            <li>Metric-Based Autoscaling</li>
+            <li>Instances and VCN</li>
+            <li>Bastion</li>
+        </ul>
+    
+        <h2>Prerequisites</h2>
+        <ul>
+            <li>Import SSL Certificate in Oracle Cloud Infrastructure (OCI).</li>
+            <li>Familiarity with creating and using Bastion Service.</li>
+            <li>Basic understanding of OCI fundamentals.</li>
+        </ul>
+    
+        <h2>Step 1: Set Up Web Server</h2>
+        <ol>
+            <li>Create a new Virtual Cloud Network with the Wizard to abstract away some networking.</li>
+            <li>Set up a new OCI instance with the specified configuration (A1.Flex, 1 OCPU, 6GB Memory, Ubuntu) in the private subnet. Include Bastion Agent and choose SSH keys.</li>
+            <li>Create a Bastion session and connect to the instance.</li>
+        </ol>
+    
+        <h3>Allow incoming HTTP and HTTPS traffic</h3>
+        <pre>
+            sudo iptables -I INPUT 6 -m state --state NEW -p tcp --dport 5000 -j ACCEPT
+            sudo iptables -I INPUT 7 -m state --state NEW -p tcp --dport 80 -j ACCEPT
+            sudo netfilter-persistent save
+        </pre>
+    
+        <h3>Install required packages</h3>
+        <pre>
+            sudo apt update
+            sudo apt install -y python3-pip nginx
+        </pre>
+    
+        <h3>Install virtualenv and virtualenvwrapper</h3>
+        <pre>
+            pip3 install virtualenv virtualenvwrapper
+            echo 'export WORKON_HOME=~/envs' >> ~/.bashrc
+            echo 'export PATH=$PATH:/home/ubuntu/.local/bin' >> ~/.bashrc
+            echo 'source /home/ubuntu/.local/bin/virtualenvwrapper.sh' >> ~/.bashrc
+            source ~/.bashrc
+        </pre>
+    
+        <h3>Create and activate a virtual environment</h3>
+        <pre>
+            mkvirtualenv flask01
+            workon flask01
+        </pre>
+    
+        <h3>Install Flask and Gunicorn</h3>
+        <pre>
+            pip3 install Flask gunicorn
+        </pre>
+    
+        <h3>Clone and set up your Flask project</h3>
+        <pre>
+            git clone &lt;your_project_repository&gt;
+            cd flask-project
+            pip install -r requirements.txt
+            export FLASK_APP=app.py
+        </pre>
+    
+        <h3>Run Flask app with Gunicorn</h3>
+        <pre>
+            gunicorn -w 4 -b 0.0.0.0:5000 app:app
+        </pre>
+    
+        <h3>Install and configure Nginx</h3>
+        <pre>
+            sudo nano /etc/nginx/sites-available/demo_app.conf
+        </pre>
+            In demo_app.conf:
+        <pre>
+            server {
+              listen 80;
+              server_name YOUR_DOMAIN_NAME;
+            
+              location / {
+                  proxy_pass http://127.0.0.1:5000;
+                  proxy_set_header Host $host;
+                  proxy_set_header X-Real-IP $remote_addr;
+                  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+              }
+            }
+        </pre>
+    
+        <h3>Activate and Check</h3>
+        <pre>
+            sudo ln -s /etc/nginx/sites-available/demo_app.conf /etc/nginx/sites-enabled
+            sudo nginx -t
+            sudo service nginx restart
+        </pre>
+    
+        <h3>Configure Gunicorn to start on boot</h3>
+        <pre>
+            sudo nano /etc/systemd/system/flask-app.service
+        </pre>
+        <pre>
+            [Unit]
+            Description=Gunicorn instance to serve Flask application
+            After=network.target
+            
+            [Service]
+            User=ubuntu
+            Group=www-data
+            WorkingDirectory=/home/ubuntu/flask-project
+            Environment="PATH=/home/ubuntu/envs/flask01/bin"
+            ExecStart=/home/ubuntu/envs/flask01/bin/gunicorn --workers 4 --bind 0.0.0.0:5000 app:app
+            
+            [Install]
+            WantedBy=multi-user.target
+        </pre>
+    
+        <h3>Check health and activate</h3>
+        <pre>
+            sudo systemctl daemon-reload
+            sudo systemctl enable flask-app
+            sudo systemctl start flask-app
+            sudo systemctl status flask-app
+        </pre>
+    
+        <h2>Step 2: Create Custom Image, Instance Configuration, Instance Pool, and Autoscaling</h2>
+    
+        <h3>Create Custom Image from the Server and launch a new Instance with it</h3>
+        <p>Create a custom Image from the Webserver and use it to launch a new instance. You could start a little Clean-Up and delete the first instance. Wait until the new Webserver is running and check if you can see the webpage: &lt;publicip:5000&gt;</p>
+    
+        <h3>Create Instance Configuration</h3>
+        <p>Set up the Instance Configuration.</p>
+    
+        <h3>Create Instance Pool with the freshly created Instance Config</h3>
+        <p>Choose 2 Instances. Select Attach Load Balancer -&gt; Select the Load Balancer, Backend Set, and Port 80 -&gt; Next + Create.</p>
+    
+        <h3>Configure Autoscaling Configurations</h3>
+        <p>Navigate to Autoscaling Configurations in Compute and start the process. Choose Instance Pool, Metric-Based Autoscaling, CPU Utilization -&gt; Scale Out Rule &gt; 70 -&gt; Scale Down Rule &lt; 20 -&gt; Min. 1 | Max. 2 | Start 2.</p>
+    
+        <h2>Clean Up instances that are not needed</h2>
+        <p>Terminate the 2 instances we first created (that are not part of the instance pool) if not already done: The first Instance that was used to create custom image and the one we created with the custom image.</p>
     </div>
+    
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="check2" viewBox="0 0 16 16">
           <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
